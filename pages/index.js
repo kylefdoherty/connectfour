@@ -2,12 +2,15 @@ import Board from '../components/board'
 import range from 'lodash.range'
 
 const buildCells = columId => {
-  return range(6).map(i => {
-    return {
-      id: `${columId}-${i}`,
+  return range(6).reduce((obj, i) => {
+    const id = `${columId}-${i}`
+    const cell = {
+      id,
       state: 'empty',
     }
-  })
+    obj[id] = cell
+    return obj
+  }, {})
 }
 
 const boardData = range(7).reduce((obj, i) => {

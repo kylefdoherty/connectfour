@@ -18,19 +18,23 @@ class Board extends Component {
   }
 
   handleMove = colId => {
-    console.log('HANDLE MOVE', colId)
-    console.log(this.state.data)
-
     const clickedCol = this.state.data[colId]
     const emptyCells = filter(clickedCol.cells, cell => cell.state == 'empty')
-    console.log('clickedCOL', emptyCells)
     const bottomCell = emptyCells[emptyCells.length - 1]
     const updatedCell = {
       ...bottomCell,
       state: this.state.move,
     }
+    clickedCol.cells[updatedCell.id] = updatedCell
 
-    console.log('updatedCell', updatedCell)
+    this.setState((prevState, props) => {
+      prevState.data[colId] = clickedCol
+
+      return {
+        data: prevState.data,
+      }
+    })
+
     // grab that columns cells
     // get the bottom most empty cell
     // set it to the current move
@@ -49,7 +53,7 @@ class Board extends Component {
               <Column
                 key={col.id}
                 id={col.id}
-                cells={col.cells}
+                cells={values(col.cells)}
                 handleMove={this.handleMove}
               />
             )

@@ -6,11 +6,17 @@ const Cell = ({ state, hover, id }) => {
     'cell-content': true,
     hover: hover,
   })
+  const cellColor = {
+    empty: 'white',
+    red: 'red',
+    black: 'black',
+  }
 
   return (
     <>
       <div className="cell-container">
         <div className={circleClasses}>{id}</div>
+        <div>{state}</div>
       </div>
       <style jsx>{`
         .cell-container {
@@ -24,7 +30,7 @@ const Cell = ({ state, hover, id }) => {
         .cell-content {
           height: 80%;
           width: 80%;
-          background: ${state};
+          background: ${cellColor[state]};
           border-radius: 50%;
         }
         .hover {

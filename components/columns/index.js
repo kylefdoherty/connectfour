@@ -9,7 +9,7 @@ class Column extends Component {
     return (
       <div onClick={() => this.props.handleMove(this.props.id)}>
         {this.props.cells.map(cell => {
-          return <Cell key={cell.id} id={cell.id} />
+          return <Cell key={cell.id} id={cell.id} state={cell.state} />
         })}
       </div>
     )
