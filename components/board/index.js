@@ -18,7 +18,12 @@ class Board extends Component {
   handleMove = colId => {
     const clickedCol = this.state.data[colId]
     const emptyCells = filter(clickedCol.cells, cell => cell.state == 'white')
-    console.log('Empty CELLS', emptyCells)
+
+    if (emptyCells.length === 0) {
+      alert('Column is full')
+      return
+    }
+
     const bottomCell = emptyCells[emptyCells.length - 1]
 
     const updatedCell = {
