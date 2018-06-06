@@ -6,7 +6,7 @@ const buildCells = columId => {
     const id = `${columId}-${i}`
     const cell = {
       id,
-      state: 'empty',
+      state: 'white',
     }
     obj[id] = cell
     return obj

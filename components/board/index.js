@@ -19,8 +19,10 @@ class Board extends Component {
 
   handleMove = colId => {
     const clickedCol = this.state.data[colId]
-    const emptyCells = filter(clickedCol.cells, cell => cell.state == 'empty')
+    const emptyCells = filter(clickedCol.cells, cell => cell.state == 'white')
+    console.log('Empty CELLS', emptyCells)
     const bottomCell = emptyCells[emptyCells.length - 1]
+
     const updatedCell = {
       ...bottomCell,
       state: this.state.move,

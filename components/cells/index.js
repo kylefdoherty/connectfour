@@ -5,12 +5,9 @@ const Cell = ({ state, hover, id }) => {
   const circleClasses = classNames({
     'cell-content': true,
     hover: hover,
+    red: state === 'red',
+    black: state === 'black',
   })
-  const cellColor = {
-    empty: 'white',
-    red: 'red',
-    black: 'black',
-  }
 
   return (
     <>
@@ -30,8 +27,14 @@ const Cell = ({ state, hover, id }) => {
         .cell-content {
           height: 80%;
           width: 80%;
-          background: ${cellColor[state]};
+          background: white;
           border-radius: 50%;
+        }
+        .red {
+          background: red;
+        }
+        .black {
+          background: black;
         }
         .hover {
           border: 1px solid red;
