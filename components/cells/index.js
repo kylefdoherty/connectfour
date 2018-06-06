@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
-const Cell = ({ position, state, hover }) => {
+const Cell = ({ state, hover, id }) => {
   const circleClasses = classNames({
     'cell-content': true,
     hover: hover,
@@ -10,12 +10,12 @@ const Cell = ({ position, state, hover }) => {
   return (
     <>
       <div className="cell-container">
-        <div className={circleClasses} />
+        <div className={circleClasses}>{id}</div>
       </div>
       <style jsx>{`
         .cell-container {
-          height: 100px;
-          width: 100px;
+          height: 80px;
+          width: 80px;
           background: #f2c94c;
           display: flex;
           align-items: center;
@@ -37,14 +37,12 @@ const Cell = ({ position, state, hover }) => {
 }
 
 Cell.propTypes = {
-  position: PropTypes.number,
   state: PropTypes.string,
   hover: PropTypes.bool,
 }
 
 Cell.defaultProps = {
   state: 'white',
-  position: 0,
   hover: false,
 }
 
