@@ -1,10 +1,25 @@
 import Board from '../components/board'
+import range from 'lodash.range'
+
+const buildCells = columId => {
+  return range(6).map(i => {
+    return {
+      id: `${columId}-${i}`,
+      state: 'empty',
+    }
+  })
+}
+
+const boardData = range(7).reduce((obj, i) => {
+  obj[i] = { id: i, isFull: false, cells: buildCells(i) }
+  return obj
+}, {})
 
 const ConnectFourContainer = () => (
   <>
     <div className="connectfour-container">
       <div className="connectfour-content">
-        <Board />
+        <Board data={boardData} />
       </div>
     </div>
     <style jsx>{`
