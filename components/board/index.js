@@ -15,7 +15,60 @@ class Board extends Component {
     return prevMove === 'red' ? 'black' : 'red'
   }
 
+  handleMouseOut = colId => {
+    // TODO - dry this up
+    const clickedCol = this.state.data[colId]
+    const emptyCells = filter(clickedCol.cells, cell => cell.state == 'white')
+
+    if (emptyCells.length === 0) {
+      return
+    }
+
+    const bottomCell = emptyCells[emptyCells.length - 1]
+
+    const updatedCell = {
+      ...bottomCell,
+      hoverState: null,
+    }
+    clickedCol.cells[updatedCell.id] = updatedCell
+
+    this.setState((prevState, props) => {
+      prevState.data[colId] = clickedCol
+
+      return {
+        data: prevState.data,
+      }
+    })
+  }
+
+  handleMouseOver = colId => {
+    // TODO - dry this up
+    const clickedCol = this.state.data[colId]
+    const emptyCells = filter(clickedCol.cells, cell => cell.state == 'white')
+
+    if (emptyCells.length === 0) {
+      return
+    }
+
+    const bottomCell = emptyCells[emptyCells.length - 1]
+
+    const updatedCell = {
+      ...bottomCell,
+      hoverState: this.state.move,
+    }
+    clickedCol.cells[updatedCell.id] = updatedCell
+
+    this.setState((prevState, props) => {
+      prevState.data[colId] = clickedCol
+
+      return {
+        data: prevState.data,
+      }
+    })
+  }
+
   handleMove = colId => {
+    // TODO - dry this up
     const clickedCol = this.state.data[colId]
     const emptyCells = filter(clickedCol.cells, cell => cell.state == 'white')
 
@@ -29,6 +82,7 @@ class Board extends Component {
     const updatedCell = {
       ...bottomCell,
       state: this.state.move,
+      hoverState: null,
     }
     clickedCol.cells[updatedCell.id] = updatedCell
 
@@ -40,12 +94,6 @@ class Board extends Component {
         move: this.toggleMove(prevState.move),
       }
     })
-
-    // grab that columns cells
-    // get the bottom most empty cell
-    // set it to the current move
-    // toggle the move
-    // check if column is full
   }
 
   render() {
@@ -53,7 +101,6 @@ class Board extends Component {
     return (
       <>
         <div className="board">
-          <h3>{`Current move: ${this.state.move}`}</h3>
           {values(this.state.data).map(col => {
             return (
               <Column
@@ -61,6 +108,8 @@ class Board extends Component {
                 id={col.id}
                 cells={values(col.cells)}
                 handleMove={this.handleMove}
+                handleMouseOver={this.handleMouseOver}
+                handleMouseOut={this.handleMouseOut}
               />
             )
           })}

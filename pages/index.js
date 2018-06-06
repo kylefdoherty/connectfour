@@ -7,6 +7,7 @@ const buildCells = columId => {
     const cell = {
       id,
       state: 'white',
+      hoverState: null,
     }
     obj[id] = cell
     return obj

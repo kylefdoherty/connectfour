@@ -1,18 +1,36 @@
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
-const Cell = ({ state, hover, id }) => {
-  const circleClasses = classNames({
-    'cell-content': true,
-    hover: hover,
-    red: state === 'red',
-    black: state === 'black',
-  })
+const Cell = ({ state, hover, id, hoverState }) => {
+  // const circleClasses = classNames({
+  //   'cell-content': true,
+  //   'hover-red': hoverState === 'red',
+  //   'hover-black': hoverState === 'black',
+  //   red: state === 'red',
+  //   black: state === 'black',
+  // })
+
+  const cellStyle = {
+    height: '80%',
+    width: '80%',
+    background: state,
+    borderRadius: '50%',
+    border: 'none',
+  }
+
+  const hoveredCellStyle = {
+    height: '80%',
+    width: '80%',
+    background: hoverState === 'red' ? '#fdc6c6' : '#adabab',
+    borderRadius: '50%',
+  }
+
+  let style = state === 'white' && hoverState ? hoveredCellStyle : cellStyle
 
   return (
     <>
       <div className="cell-container">
-        <div className={circleClasses} />
+        <div style={style} />
       </div>
       <style jsx>{`
         .cell-container {
@@ -22,22 +40,6 @@ const Cell = ({ state, hover, id }) => {
           display: flex;
           align-items: center;
           justify-content: center;
-        }
-        .cell-content {
-          height: 80%;
-          width: 80%;
-          background: white;
-          border-radius: 50%;
-        }
-        .red {
-          background: red;
-        }
-        .black {
-          background: black;
-        }
-        .hover {
-          border: 1px solid red;
-          background: #fdc6c6;
         }
       `}</style>
     </>
