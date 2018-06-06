@@ -11,10 +11,8 @@ class Board extends Component {
     data: this.props.data,
   }
 
-  toggleMove = () => {
-    this.setState((prevState, props) => ({
-      counter: prevState.counter + props.increment,
-    }))
+  toggleMove = prevMove => {
+    return prevMove === 'red' ? 'black' : 'red'
   }
 
   handleMove = colId => {
@@ -34,6 +32,7 @@ class Board extends Component {
 
       return {
         data: prevState.data,
+        move: this.toggleMove(prevState.move),
       }
     })
 

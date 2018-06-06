@@ -12,8 +12,7 @@ const Cell = ({ state, hover, id }) => {
   return (
     <>
       <div className="cell-container">
-        <div className={circleClasses}>{id}</div>
-        <div>{state}</div>
+        <div className={circleClasses} />
       </div>
       <style jsx>{`
         .cell-container {
